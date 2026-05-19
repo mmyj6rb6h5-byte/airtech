@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式会社エアテック | 会社概要</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a2e;
+    --deep: #0f3460;
+    --accent: #c8a96e;
+    --accent2: #e8c99e;
+    --soft: #f5f0e8;
+    --muted: #7a7a8a;
+    --line: #d8d0c0;
+    --white: #fdfcf9;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--ink);
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 50%, rgba(15,52,96,0.8) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 30%, rgba(200,169,110,0.15) 0%, transparent 50%),
+      linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 40%, #0f3460 100%);
+  }
+
+  /* Decorative grid lines */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,169,110,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,169,110,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Vertical accent bar */
+  .hero-bar {
+    position: absolute;
+    left: 80px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+    opacity: 0.5;
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    padding: 0 20px;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  .hero-en {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(11px, 1.5vw, 14px);
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0.9;
+  }
+
+  .hero-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(38px, 6vw, 76px);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.1;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+
+  .hero-title span {
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: clamp(12px, 1.8vw, 15px);
+    font-weight: 300;
+    color: rgba(253,252,249,0.5);
+    letter-spacing: 0.25em;
+    margin-top: 20px;
+  }
+
+  .hero-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+    margin: 28px auto;
+    opacity: 0.7;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(253,252,249,0.35);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    animation: fadeUp 1.8s ease both;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 0.8; transform: scaleY(1.1); }
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.4s, padding 0.3s;
+  }
+
+  nav.scrolled {
+    background: rgba(26,26,46,0.95);
+    backdrop-filter: blur(12px);
+    padding: 14px 60px;
+    border-bottom: 1px solid rgba(200,169,110,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.08em;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(253,252,249,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    font-weight: 300;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 100px 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 400;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 60px;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--white);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text {
+    font-size: 15px;
+    line-height: 2.1;
+    color: #3a3a4a;
+    font-weight: 300;
+  }
+
+  .about-text p + p { margin-top: 20px; }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--line);
+  }
+
+  .stat-box {
+    background: var(--white);
+    padding: 36px 28px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--deep);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── COMPANY INFO TABLE ── */
+  #info {
+    background: var(--soft);
+  }
+
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .info-table tr {
+    border-bottom: 1px solid var(--line);
+    transition: background 0.2s;
+  }
+
+  .info-table tr:first-child { border-top: 1px solid var(--line); }
+
+  .info-table tr:hover { background: rgba(200,169,110,0.05); }
+
+  .info-table th {
+    width: 240px;
+    padding: 28px 0;
+    text-align: left;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    font-weight: 400;
+    vertical-align: top;
+    padding-right: 40px;
+  }
+
+  .info-table th::before {
+    content: '—  ';
+    color: var(--accent);
+    font-size: 11px;
+  }
+
+  .info-table td {
+    padding: 28px 0;
+    font-size: 15px;
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.8;
+    vertical-align: top;
+  }
+
+  /* ── BUSINESS ── */
+  #business {
+    background: var(--white);
+  }
+
+  .business-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--line);
+    margin-top: 0;
+  }
+
+  .biz-card {
+    background: var(--white);
+    padding: 44px 32px;
+    position: relative;
+    transition: background 0.3s;
+    overflow: hidden;
+  }
+
+  .biz-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+
+  .biz-card:hover { background: #faf8f4; }
+  .biz-card:hover::before { transform: scaleX(1); }
+
+  .biz-num {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: rgba(200,169,110,0.2);
+    line-height: 1;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .biz-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--deep);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  .biz-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* ── REPRESENTATIVE ── */
+  #rep {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #rep .section-title { color: var(--white); }
+
+  .rep-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 50% 80% at 90% 50%, rgba(200,169,110,0.08) 0%, transparent 60%);
+  }
+
+  .rep-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .rep-quote {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 400;
+    color: rgba(253,252,249,0.9);
+    line-height: 2;
+    letter-spacing: 0.05em;
+    border-left: 2px solid var(--accent);
+    padding-left: 36px;
+  }
+
+  .rep-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,169,110,0.2);
+    padding: 40px;
+    text-align: center;
+  }
+
+  .rep-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--deep) 100%);
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 24px;
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .rep-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 20px;
+    color: var(--white);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .rep-title-tag {
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    font-weight: 300;
+  }
+
+  /* ── ACCESS ── */
+  #access {
+    background: var(--soft);
+  }
+
+  .access-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .access-info dt {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    font-weight: 400;
+    margin-bottom: 8px;
+    margin-top: 28px;
+  }
+
+  .access-info dt:first-child { margin-top: 0; }
+
+  .access-info dd {
+    font-size: 15px;
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .map-placeholder {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #e8e4dc 0%, #d8d0c4 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-placeholder iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    filter: grayscale(30%) contrast(1.05);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0a0a1a;
+    padding: 60px 0 40px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  .footer-info {
+    font-size: 12px;
+    color: rgba(253,252,249,0.3);
+    letter-spacing: 0.15em;
+    font-weight: 300;
+    line-height: 2;
+  }
+
+  .footer-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(200,169,110,0.3);
+    margin: 24px auto;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    nav.scrolled { padding: 12px 24px; }
+    .nav-links { display: none; }
+    .container { padding: 0 24px; }
+    section { padding: 72px 0; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .business-grid { grid-template-columns: 1fr 1fr; }
+    .rep-inner { grid-template-columns: 1fr; gap: 40px; }
+    .access-grid { grid-template-columns: 1fr; }
+    .info-table th { width: 140px; }
+  }
+
+  @media (max-width: 600px) {
+    .business-grid { grid-template-columns: 1fr; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">エア<span>テック</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">会社について</a></li>
+    <li><a href="#info">会社概要</a></li>
+    <li><a href="#business">事業内容</a></li>
+    <li><a href="#rep">代表者</a></li>
+    <li><a href="#access">アクセス</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-bar"></div>
+  <div class="hero-content">
+    <div class="hero-en">Airtech Co., Ltd.</div>
+    <h1 class="hero-title">株式会社<br><span>エアテック</span></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">テクノロジーで未来を切り拓く</p>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">私たちについて</h2>
+        <div class="about-text">
+          <p>株式会社エアテックは、電子機器・コンピューターシステムの販売から、コンサルティング、輸出入業務まで幅広い事業を展開する総合テクノロジー企業です。</p>
+          <p>2016年の設立以来、時代のニーズに応えながら、お客様に最高の製品とサービスをお届けしてまいりました。</p>
+          <p>テクノロジーの可能性を最大限に引き出し、社会に価値を生み出し続けることが私たちの使命です。</p>
+        </div>
+      </div>
+      <div class="about-stats reveal reveal-delay-2">
+        <div class="stat-box">
+          <div class="stat-num">2016</div>
+          <div class="stat-label">設立年</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">300<span style="font-size:18px">万</span></div>
+          <div class="stat-label">資本金</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">17</div>
+          <div class="stat-label">事業領域</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">東京</div>
+          <div class="stat-label">本社所在地</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY INFO -->
+<section id="info">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Company Profile</div>
+      <h2 class="section-title">会社概要</h2>
+    </div>
+    <table class="info-table reveal reveal-delay-1">
+      <tbody>
+        <tr>
+          <th>会社名</th>
+          <td>株式会社エアテック<br><small style="color:var(--muted);font-size:12px;letter-spacing:0.1em">カブシキガイシャ エアテック</small></td>
+        </tr>
+        <tr>
+          <th>設立</th>
+          <td>平成28年5月10日（2016年）</td>
+        </tr>
+        <tr>
+          <th>資本金</th>
+          <td>金300万円</td>
+        </tr>
+        <tr>
+          <th>代表取締役</th>
+          <td>堀越聞華</td>
+        </tr>
+        <tr>
+          <th>本社所在地</th>
+          <td>〒121-0813<br>東京都足立区竹の塚１丁目２７番９号<br>高橋ビル３０２</td>
+        </tr>
+        <tr>
+          <th>事業内容</th>
+          <td>電子機器及び周辺機器の製造・販売、コンピューターソフトウェア・ハードウェアの販売、各種コンサルティング業務、電気通信機器の製造・販売・輸出入、食料品・日用品の輸出入・販売、医療機器・医薬部外品の販売、健康食品の販売・輸出入、不動産業、土木建築業　他</td>
+        </tr>
+        <tr>
+          <th>口座情報</th>
+          <td>東京東信用金庫　隅田支店<br>普通　口座番号：5393050<br>口座名義：株式会社エアテック</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- BUSINESS -->
+<section id="business">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Our Business</div>
+      <h2 class="section-title">事業内容</h2>
+    </div>
+  </div>
+  <div style="max-width:1100px;margin:0 auto;padding:0 40px">
+    <div class="business-grid">
+      <div class="biz-card reveal">
+        <div class="biz-num">01</div>
+        <div class="biz-title">電子機器・周辺機器<br>製造・販売</div>
+        <div class="biz-desc">最先端の電子機器及び周辺機器の製造と販売。お客様のニーズに合わせた製品をご提供します。</div>
+      </div>
+      <div class="biz-card reveal reveal-delay-1">
+        <div class="biz-num">02</div>
+        <div class="biz-title">コンピューター<br>ソリューション</div>
+        <div class="biz-desc">ソフトウェア、ハードウェア及び周辺機器の販売から各種コンサルティング業務まで幅広く対応。</div>
+      </div>
+      <div class="biz-card reveal reveal-delay-2">
+        <div class="biz-num">03</div>
+        <div class="biz-title">電気通信機器<br>輸出入</div>
+        <div class="biz-desc">電気通信機器の製造・販売・輸出入を通じてグローバルな事業展開を行っています。</div>
+      </div>
+      <div class="biz-card reveal reveal-delay-1">
+        <div class="biz-num">04</div>
+        <div class="biz-title">医療機器・<br>健康食品</div>
+        <div class="biz-desc">医療機器、医薬部外品、健康食品の販売・輸出入。人々の健康をサポートします。</div>
+      </div>
+      <div class="biz-card reveal reveal-delay-2">
+        <div class="biz-num">05</div>
+        <div class="biz-title">食料品・日用品<br>輸出入・販売</div>
+        <div class="biz-desc">食料品および日用品の輸出入と販売。生活に必要な商品を幅広くお届けします。</div>
+      </div>
+      <div class="biz-card reveal reveal-delay-3">
+        <div class="biz-num">06</div>
+        <div class="biz-title">建設・不動産・<br>エコ事業</div>
+        <div class="biz-desc">土木建築業、水道・消防設備業、不動産業、環境配慮型エコ商品の販売まで多角的に展開。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REPRESENTATIVE -->
+<section id="rep">
+  <div class="rep-bg"></div>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" style="color:var(--accent2)">Representative</div>
+      <h2 class="section-title">代表者</h2>
+    </div>
+    <div class="rep-inner reveal reveal-delay-1">
+      <div class="rep-quote">
+        テクノロジーの力で社会に貢献し、<br>
+        お客様とともに新しい未来を<br>
+        切り拓いていくことが<br>
+        私たちの使命です。
+      </div>
+      <div class="rep-card">
+        <div class="rep-avatar">堀</div>
+        <div class="rep-name">堀越聞華</div>
+        <div class="rep-title-tag">代表取締役</div>
+        <div style="margin-top:20px;width:30px;height:1px;background:rgba(200,169,110,0.4);margin-left:auto;margin-right:auto"></div>
+        <div style="margin-top:16px;font-size:12px;color:rgba(253,252,249,0.4);letter-spacing:0.1em;font-weight:300">
+          生年月日：1991年4月27日
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section id="access">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Access</div>
+      <h2 class="section-title">アクセス</h2>
+    </div>
+    <div class="access-grid reveal reveal-delay-1">
+      <div>
+        <dl class="access-info">
+          <dt>会社名</dt>
+          <dd>株式会社エアテック</dd>
+          <dt>郵便番号</dt>
+          <dd>〒121-0813</dd>
+          <dt>所在地</dt>
+          <dd>東京都足立区竹の塚１丁目２７番９号<br>高橋ビル３０２</dd>
+          <dt>設立</dt>
+          <dd>平成28年5月10日</dd>
+        </dl>
+      </div>
+      <div class="map-placeholder">
+        <iframe
+          src="https://maps.google.com/maps?q=東京都足立区竹の塚1丁目27番9号&output=embed&z=16"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">株式会社<span>エアテック</span></div>
+  <div class="footer-divider"></div>
+  <div class="footer-info">
+    〒121-0813 東京都足立区竹の塚１丁目２７番９号 高橋ビル３０２<br>
+    設立：平成28年5月10日
+  </div>
+  <div style="margin-top:32px;font-size:11px;color:rgba(253,252,249,0.18);letter-spacing:0.1em">
+    © 2016 株式会社エアテック All Rights Reserved.
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
